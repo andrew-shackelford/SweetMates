@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- documentation at http://getbootstrap.com/, alternative themes at https://www.bootstrapcdn.com/bootswatch/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Oxygen|Open+Sans+Condensed:700" rel="stylesheet">
+        <link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"/>
+        
+        <meta charset="utf-8"/>
+        <meta content="initial-scale=1, width=device-width" name="viewport"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{{ url_for('static', filename='layout.js') }}"></script>
+
+        <title>SweetMates {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <nav id = "top_nav" class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ url_for('index') }}"><div class="small_logo"></div></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        {% if session.user_id %}
+                            <ul class="nav navbar-nav">
+                                <li><a href="{{ url_for('chat') }}">Chats</a></li>
+                                <li><a href="{{ url_for('chores') }}">Chores</a></li>
+                                <li><a href="{{ url_for('choose') }}">Choose</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="{{ url_for('change_password') }}">Change Password</a></li>
+                                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="{{ url_for('register') }}">Register</a></li>
+                                <li><a href="{{ url_for('logout') }}">Log In</a></li>
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+            {% if session.user_id %}
+            <div id = "side">
+                <nav id = "side_nav" class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        
+                    <div id="Sidebar" style="margin-top:10px">
+                        <div class="list-group panel">
+                          <a href="#demo2" class="demo2 list-group-item list-group-item-danger" data-toggle="collapse" data-parent="#MainMenu"><h5>Current Group&nbsp;</h5><i class="glyphdemo2 glyphicon glyphicon-menu-down" id="glyphdemo2"></i></a>
+                          <div class="card-block collapse" id="demo2">
+                            <a href="{{ url_for('index') }}" class="list-group-item"><h6>{{ cur_group }}</h6></a>
+                            {% if cur_group != "None" %}
+                            <a href="{{ url_for('add_user') }}" class="list-group-item">Add Members To Group</a>
+                            {% endif %}
+                          </div>
+                          <a href="#demo3" class="demo3 list-group-item list-group-item-danger" data-toggle="collapse" data-parent="#MainMenu"><h5>All Groups&nbsp;</h5><i class="glyphdemo3 glyphicon glyphicon-menu-down" id="glyphdemo3"></i></a>
+                          <div class="card-block collapse" id="demo3">
+                            {% for group in groups %}
+                                <a href="{{ url_for('switch_group') }}?gid={{group.group_id}}" class="list-group-item">{{group.group_name}}</a>
+                            {% endfor %}
+                          </div>
+                          <a href="#demo4" class="demo4 list-group-item list-group-item-danger" data-toggle="collapse" data-parent="#MainMenu"><h5>New Groups&nbsp;</h5><i class="glyphdemo4 glyphicon glyphicon-menu-down" id="glyphdemo4"></i></a>
+                          <div class="card-block collapse" id="demo4">
+                            <a href="{{ url_for('create_group') }}" class="list-group-item">Create New Group</a>
+                            <a href="{{ url_for('join_group') }}" class="list-group-item">Join New Group</a>
+                          </div>
+                        </div>
+                        
+                    </div>
+                </nav>
+            </div>
+            {% else %}
+            <div class="red"></div>    
+            {% endif %}
+            {% if get_flashed_messages() %}
+                <header>
+                    <div class="alert alert-info" role="alert">
+                        {{ get_flashed_messages() | join(" ") }}
+                    </div>
+                </header>
+            {% endif %}
+
+            <main>
+                {% if error %}
+                <div id="error"> * {{error}} * </div>
+                <br>
+                {% endif %}
+                {% block main %}{% endblock %}
+            </main>
+            
+        </div>
+
+    </body>
+
+</html>

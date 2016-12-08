@@ -1,0 +1,232 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Choose
+{% endblock %}
+
+{% block main %}
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{ url_for('static', filename='choose.js') }}"></script>
+    <div class="choose"></div>
+    <div class="subheading">
+    <h3>My Choices:</h3>
+    </div>
+    <table>
+        <tr>
+            <th  style="min-width:275px"><h6>Date Asked</h6></th>
+            <th><h6>Question</h6></th>
+            <th><h6>Answer</h6></th>
+        </tr>
+        {% for choice in my_choices %}
+        <tr>
+            <td>{{choice.date_asked}}</td>
+            <td>{{ choice.text }}</td>
+            <td>
+                <form action="{{ url_for('choose') }}" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit">Yes</button>
+                        </div>
+                        <div class="form-group">
+                                <input autofocus class="form-control" type = "hidden" name="form" value="choice"/>
+                        </div>
+                        <div class="form-group">
+                                <input autofocus class="form-control" type = "hidden" name="choice" value="{{choice.id}}"/>
+                        </div>
+                        <div class="form-group">
+                                <input autofocus class="form-control" type = "hidden" name="yes" value="yes"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </td>
+            <td>
+                <form action="{{ url_for('choose') }}" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-danger" type="submit">No</button>
+                        </div>
+                        <div class="form-group">
+                                <input autofocus class="form-control" type = "hidden" name="form" value="choice"/>
+                        </div>
+                        <div class="form-group">
+                                <input autofocus class="form-control" type = "hidden" name="choice" value="{{choice.id}}"/>
+                        </div>
+                        <div class="form-group">
+                                <input autofocus class="form-control" type = "hidden" name="yes" value="no"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    {% if num_pages1 == 0%}
+    {% elif page1 == 1 %}
+    <h5>Page: 1</h5>
+        {% if num_pages1 == 1%}
+        {% elif num_pages1 == 2%}
+        <a href="{{url_for('choose')}}?p1=2"><h4>2</h4></a>
+        {% elif num_pages1 == 3%}
+        <a href="{{url_for('choose')}}?p1=2"><h4>2</h4></a>
+        <a href="{{url_for('choose')}}?p1=3"><h4>3</h4></a>
+        {% else %}
+        <a href="{{url_for('choose')}}?p1=2"><h4>2</h4></a>
+        ...
+        <a href="{{url_for('choose')}}?p1={{num_pages1}}"><h4>{{num_pages1}}</h4></a>
+        {% endif %}
+    {% elif page1 == 2 %}
+    <h5>Page:</h5>
+    <a href="{{url_for('choose')}}?p1=1"><h4>1</h4></a>
+    <h5>2</h5>
+        {% if num_pages1 == 2%}
+        {% elif num_pages1 == 3%}
+        <a href="{{url_for('choose')}}?p1=3"><h4>3</h4></a>
+        {% elif num_pages1 == 4%}
+        <a href="{{url_for('choose')}}?p1=3"><h4>3</h4></a>
+        <a href="{{url_for('choose')}}?p1=4"><h4>4</h4></a>
+        {% else %}
+        <a href="{{url_for('choose')}}?p1=3"><h4>3</h4></a>
+        ...
+        <a href="{{url_for('choose')}}?p1={{num_pages1}}"><h4>{{num_pages1}}</h4></a>
+        {% endif %}
+    {% elif page1 == 3 %}
+    <h5>Page:</h5>
+    <a href="{{url_for('choose')}}?p1=1"><h4>1</h4></a>
+    <a href="{{url_for('choose')}}?p1=2"><h4>2</h4></a>
+    <h5>3</h5>
+        {% if num_pages1 == 3%}
+        {% elif num_pages1 == 4%}
+        <a href="{{url_for('choose')}}?p1=4"><h4>4</h4></a>
+        {% elif num_pages1 == 5%}
+        <a href="{{url_for('choose')}}?p1=4"><h4>4</h4></a>
+        <a href="{{url_for('choose')}}?p1=5"><h4>5</h4></a>
+        {% else %}
+        <a href="{{url_for('choose')}}?p1=4"><h4>4</h4></a>
+        ...
+        <a href="{{url_for('choose')}}?p1={{num_pages1}}"><h4>{{num_pages1}}</h4></a>
+        {% endif %}
+    {% else %}
+    <h5>Page:</h5>
+    <a href="{{url_for('choose')}}?p1=1"><h4>1</h4></a>
+    ...
+    <a href="{{url_for('choose')}}?p1={{page1 - 1}}"><h4>{{page1 - 1}}</h4></a>
+    <h5>{{page1}}</h5>
+        {% if num_pages1 == page1 %}
+        {% elif num_pages1 == page1 + 1 %}
+        <a href="{{url_for('choose')}}?p1={{num_pages1}}"><h4>{{num_pages1}}</h4></a>
+        {% elif num_pages1 == page1 + 2 %}
+        <a href="{{url_for('choose')}}?p1={{num_pages1 - 1}}"><h4>{{num_pages1 - 1}}</h4></a>
+        <a href="{{url_for('choose')}}?p1={{num_pages1}}"><h4>{{num_pages1}}</h4></a>
+        {% else %}
+        <a href="{{url_for('choose')}}?p1={{page1 + 1}}"><h4>{{page1 + 1}}</h4></a>
+        ...
+        <a href="{{url_for('choose')}}?p1={{num_pages1}}"><h4>{{num_pages1}}</h4></a>
+        {% endif %}
+    {% endif %}
+    <br>
+    <div class="subheading">
+    <h3>Already Answered:</h3>
+    </div>
+    <table>
+        <tr>
+            <th style="min-width:275px"><h6>Date Asked</h6></th>
+            <th><h6>Question</h6></th>
+            <th><h6>Yes</h6></th>
+            <th><h6>No</h6></th>
+        </tr>
+        {% for choice in chosen %}
+        <tr>
+            <td>{{choice.date_asked}}</td>
+            <td>{{ choice.text }}</td>
+            <td>
+                {{choice.yes}}
+            </td>
+            <td>
+                {{choice.no}}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    {% if num_pages2 == 0%}
+    {% elif page2 == 1 %}
+    <h5>Page: 1</h5>
+        {% if num_pages2 == 1%}
+        {% elif num_pages2 == 2%}
+        <a href="{{url_for('choose')}}?p2=2"><h4>2</h4></a>
+        {% elif num_pages2 == 3%}
+        <a href="{{url_for('choose')}}?p2=2"><h4>2</h4></a>
+        <a href="{{url_for('choose')}}?p2=3"><h4>3</h4></a>
+        {% else %}
+        <a href="{{url_for('choose')}}?p2=2"><h4>2</h4></a>
+        ...
+        <a href="{{url_for('choose')}}?p2={{num_pages2}}"><h4>{{num_pages2}}</h4></a>
+        {% endif %}
+    {% elif page2 == 2 %}
+    <h5>Page:</h5>
+    <a href="{{url_for('choose')}}?p2=1"><h4>1</h4></a>
+    <h5>2</h5>
+        {% if num_pages2 == 2%}
+        {% elif num_pages2 == 3%}
+        <a href="{{url_for('choose')}}?p2=3"><h4>3</h4></a>
+        {% elif num_pages2 == 4%}
+        <a href="{{url_for('choose')}}?p2=3"><h4>3</h4></a>
+        <a href="{{url_for('choose')}}?p2=4"><h4>4</h4></a>
+        {% else %}
+        <a href="{{url_for('choose')}}?p2=3"><h4>3</h4></a>
+        ...
+        <a href="{{url_for('choose')}}?p2={{num_pages2}}"><h4>{{num_pages2}}</h4></a>
+        {% endif %}
+    {% elif page2 == 3 %}
+    <h5>Page:</h5>
+    <a href="{{url_for('choose')}}?p2=1"><h4>1</h4></a>
+    <a href="{{url_for('choose')}}?p2=2"><h4>2</h4></a>
+    <h5>3</h5>
+        {% if num_pages2 == 3%}
+        {% elif num_pages2 == 4%}
+        <a href="{{url_for('choose')}}?p2=4"><h4>4</h4></a>
+        {% elif num_pages2 == 5%}
+        <a href="{{url_for('choose')}}?p2=4"><h4>4</h4></a>
+        <a href="{{url_for('choose')}}?p2=5"><h4>5</h4></a>
+        {% else %}
+        <a href="{{url_for('choose')}}?p2=4"><h4>4</h4></a>
+        ...
+        <a href="{{url_for('choose')}}?p2={{num_pages2}}"><h4>{{num_pages2}}</h4></a>
+        {% endif %}
+    {% else %}
+    <h5>Page:</h5>
+    <a href="{{url_for('choose')}}?p2=1"><h4>1</h4></a>
+    ...
+    <a href="{{url_for('choose')}}?p2={{page2 - 1}}"><h4>{{page2 - 1}}</h4></a>
+    <h5>{{page2}}</h5>
+        {% if num_pages2 == page2 %}
+        {% elif num_pages2 == page2 + 1 %}
+        <a href="{{url_for('choose')}}?p2={{num_pages2}}"><h4>{{num_pages2}}</h4></a>
+        {% elif num_pages2 == page2 + 2 %}
+        <a href="{{url_for('choose')}}?p2={{num_pages2 - 1}}"><h4>{{num_pages2 - 1}}</h4></a>
+        <a href="{{url_for('choose')}}?p2={{num_pages2}}"><h4>{{num_pages2}}</h4></a>
+        {% else %}
+        <a href="{{url_for('choose')}}?p2={{page2 + 1}}"><h4>{{page2 + 1}}</h4></a>
+        ...
+        <a href="{{url_for('choose')}}?p2={{num_pages2}}"><h4>{{num_pages2}}</h4></a>
+        {% endif %}
+    {% endif %}  
+    <br>
+    <div class="subheading">
+    <h3>Add Question:</h3>
+    </div>
+    <br>
+    <br>
+    <form action="{{ url_for('choose') }}" method="post" style="margin:auto">
+        <fieldset>
+            <textarea name="choice" class="textarea myquestiontext" rows="3" cols="50" placeholder="Input Question Here"></textarea>
+            <div class="form-group">
+                <button class="btn btn-primary mysubmitbutton" type="submit">Ask Question</button>
+            </div>
+            <div class="form-group">
+                <input autofocus class="form-control" type = "hidden" name="form" value="new_choice"/>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

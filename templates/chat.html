@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Chat
+{% endblock %}
+
+{% block main %}
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+    <div class="chat"></div>
+    <table>
+        <tr>
+            <th style="min-width:275px"><h3>Date</h3></th>
+            <th><h3>Text</h3></th>
+        </tr>
+        {% for chat in chats %}
+        <tr>
+            <td>{{ chat.chat_time }}</td>
+            <td>{{ chat.chat_text }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    {% if num_pages == 0%}
+    {% elif page == 1 %}
+    <h5>Page: 1</h5>
+        {% if num_pages == 1%}
+        {% elif num_pages == 2%}
+        <a href="{{url_for('chat')}}?p=2"><h4>2</h4></a>
+        {% elif num_pages == 3%}
+        <a href="{{url_for('chat')}}?p=2"><h4>2</h4></a>
+        <a href="{{url_for('chat')}}?p=3"><h4>3</h4></a>
+        {% else %}
+        <a href="{{url_for('chat')}}?p=2"><h4>2</h4></a>
+        ...
+        <a href="{{url_for('chat')}}?p={{num_pages}}"><h4>{{num_pages}}</h4></a>
+        {% endif %}
+    {% elif page == 2 %}
+    <h5>Page:</h5>
+    <a href="{{url_for('chat')}}?p=1"><h4>1</h4></a>
+    <h5>2</h5>
+        {% if num_pages == 2%}
+        {% elif num_pages == 3%}
+        <a href="{{url_for('chat')}}?p=3"><h4>3</h4></a>
+        {% elif num_pages == 4%}
+        <a href="{{url_for('chat')}}?p=3"><h4>3</h4></a>
+        <a href="{{url_for('chat')}}?p=4"><h4>4</h4></a>
+        {% else %}
+        <a href="{{url_for('chat')}}?p=3"><h4>3</h4></a>
+        ...
+        <a href="{{url_for('chat')}}?p={{num_pages}}"><h4>{{num_pages}}</h4></a>
+        {% endif %}
+    {% elif page == 3 %}
+    <h5>Page:</h5>
+    <a href="{{url_for('chat')}}?p=1"><h4>1</h4></a>
+    <a href="{{url_for('chat')}}?p=2"><h4>2</h4></a>
+    <h5>3</h5>
+        {% if num_pages == 3%}
+        {% elif num_pages == 4%}
+        <a href="{{url_for('chat')}}?p=4"><h4>4</h4></a>
+        {% elif num_pages == 5%}
+        <a href="{{url_for('chat')}}?p=4"><h4>4</h4></a>
+        <a href="{{url_for('chat')}}?p=5"><h4>5</h4></a>
+        {% else %}
+        <a href="{{url_for('chat')}}?p=4"><h4>4</h4></a>
+        ...
+        <a href="{{url_for('chat')}}?p={{num_pages}}"><h4>{{num_pages}}</h4></a>
+        {% endif %}
+    {% else %}
+    <h5>Page:</h5>
+    <a href="{{url_for('chat')}}?p=1"><h4>1</h4></a>
+    ...
+    <a href="{{url_for('chat')}}?p={{page - 1}}"><h4>{{page - 1}}</h4></a>
+    <h5>{{page}}</h5>
+        {% if num_pages == page %}
+        {% elif num_pages == page + 1 %}
+        <a href="{{url_for('chat')}}?p={{num_pages}}"><h4>{{num_pages}}</h4></a>
+        {% elif num_pages == page + 2 %}
+        <a href="{{url_for('chat')}}?p={{num_pages - 1}}"><h4>{{num_pages - 1}}</h4></a>
+        <a href="{{url_for('chat')}}?p={{num_pages}}"><h4>{{num_pages}}</h4></a>
+        {% else %}
+        <a href="{{url_for('chat')}}?p={{page + 1}}"><h4>{{page + 1}}</h4></a>
+        ...
+        <a href="{{url_for('chat')}}?p={{num_pages}}"><h4>{{num_pages}}</h4></a>
+        {% endif %}
+    {% endif %}
+    <form action="{{ url_for('chat') }}" method="post" name="messages">
+        <fieldset>
+            <textarea name="message" class="text mychattext" rows="5" cols="50" placeholder="Input Text Here"></textarea>
+            <div class="form-group">
+                <button class="btn btn-primary mysubmitbutton" type="submit">Send Message</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

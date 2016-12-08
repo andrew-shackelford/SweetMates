@@ -1,0 +1,291 @@
+.container
+{
+    /* center contents */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    text-align: center;
+}
+
+html,body
+{
+    height:100%;
+    width:100%;
+}
+
+/* colors for navbar */
+.navbar-default .navbar-brand .red
+{
+    color: #B90606;
+}
+
+/* position of side nav_bar */
+#side_nav
+{
+    position:absolute;
+    top: 60px;
+    width:18%;
+    background-color: #B90606;
+}
+#side_nav li
+{
+    width: 100%;
+}
+
+.red
+{
+    position:absolute;
+    top:60px;
+    height:100%;
+    width:18%;
+    background-image: url("login_sidebar.png");
+    background-repeat: repeat;
+    background-color: #B90606;
+    border-radius:10px;
+}
+
+/* collapsible sidebar parameters */
+.list-group.panel > .list-group-item {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px
+}
+.list-group-submenu {
+  margin-left:20px;
+  background-color: #B90606;
+}
+
+/* fonts */
+h1 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 300%;
+    color: #B90606;
+    margin:0;
+    padding:0;
+}
+h2, h3 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #B90606;
+    margin:0;
+    padding:0;
+}
+h4 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #A39290;
+    font-size:130%;
+    display:inline;
+    padding:0;
+}
+h5 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #B90606;
+    font-size: 130%;
+    display:inline;
+    padding:0;
+}
+h6 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #000000;
+    font-size: 120%;
+    margin:0;
+    padding:0;
+}
+p, div {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 100%;
+    color: #000000;
+}
+
+/* main */
+main 
+{
+    padding-left: 23%; 
+    width: auto;
+    
+}
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+main td
+{
+    /* left-align tables' cells */
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+main th {
+    padding: 8px;
+    border-bottom: 3px solid #ddd;
+}
+main tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+main table {
+    border-spacing: 5px;
+    width: 100%;
+}
+body {
+    background-color: #ffffff;
+    background-repeat: repeat;
+    background-position: left top;
+}
+
+/* textarea attributes */
+textarea {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding: 8px;
+    outline: none !important;
+    border:1px;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+/* heading images */
+.small_logo {
+    border-style: none;
+    background-image: url("small_logo.JPG");
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 30px;
+}
+
+.logo {
+    border-style: none;
+    background-image: url("logo.JPG");
+    background-repeat: no-repeat;
+    width: 600px;
+    height: 90px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.chat {
+    border-style: none;
+    background-image: url("chat.JPG");
+    background-repeat: no-repeat;
+    width: 170px;
+    height: 50px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.chores {
+    border-style: none;
+    background-image: url("chores.JPG");
+    background-repeat: no-repeat;
+    width: 230px;
+    height: 50px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.choose {
+    border-style: none;
+    background-image: url("choose.JPG");
+    background-repeat: no-repeat;
+    width: 230px;
+    height: 50px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.change_pass {
+    border-style: none;
+    background-image: url("change_pass.JPG");
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 50px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.login {
+    border-style: none;
+    background-image: url("login.JPG");
+    background-repeat: no-repeat;
+    width: 396px;
+    height: 50px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.make_group {
+    border-style: none;
+    background-image: url("make_group.JPG");
+    background-repeat: no-repeat;
+    width: 355px;
+    height: 50px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.register {
+    border-style: none;
+    background-image: url("register.JPG");
+    background-repeat: no-repeat;
+    width: 270px;
+    height: 50px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.add {
+    border-style: none;
+    background-image: url("add.JPG");
+    background-repeat: no-repeat;
+    width: 375px;
+    height: 50px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.join_group {
+    border-style: none;
+    background-image: url("join_group.JPG");
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 50px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.subheading {
+    float:left;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+/* error message */
+#error 
+{
+    color: #ea433b;
+}
+
+.today
+{
+    color: #ffa500;
+}
+
+.overdo 
+{
+    color: #ff0000;
+}

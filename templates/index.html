@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <br>
+    <h1>WELCOME TO</h1>
+    <div class="logo"></div>
+      <h2><b>HELLO, {{ user_name }}!</b></h2>
+    <br>
+    <div id="" style="margin:0px auto; width:80%">
+        <div id="column1" style="float:left; margin:0; width:33%;">
+          <h3>CURRENT GROUP</h3>
+          <h6>{{ group.group_name }}</h6>
+        </div>
+        <div id="column2" style="float:left; margin:0; width:33%;">
+          <h3>GROUP CODE</h3>
+          <h6>{{ group.group_code }}</h6>
+        </div>
+        <div id="column3" style="float:left; margin:0; width:33%;">
+          <h3>{{ group.group_name }} MEMBERS:</h3>        
+          <h6>
+            {% for user in users %}
+                {{ user.name }}
+                <br>
+            {% endfor %}
+        </h6>
+        </div>
+    </div>
+    <form id="leaveform" action="{{ url_for('index') }}" method="post">
+        <button type="button" id="leavebutton" class="btn btn-danger">Leave Current Group</button>
+    </form>
+{% endblock %}

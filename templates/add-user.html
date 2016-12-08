@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Join Group
+{% endblock %}
+
+{% block main %}
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{ url_for('static', filename='add-user.js') }}"></script>
+    <form action="{{ url_for('add_user') }}" method="post" name="join_code" class="form-horizontal">
+        <div class="add"></div>
+        <fieldset>
+            <!-- Join Code-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput"><h6>Code:</h6></label>  
+              <div class="col-md-4">
+              <input autocomplete="off" id="joincode" name="join_code" id="chorename" type="text" placeholder="Join Code" type="password" class="form-control input-md myjoincode">
+              </div>
+            </div>
+            <!-- Code Time -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="selectbasic"><h6>Code valid for:</h6></label>
+              <div class="col-md-4">
+                <select name="time" style="margin-top:10px" class="form-control">
+                    <option value="1">1 Hour</option>
+              <option value="24">1 Day</option>
+              <option value="168">1 Week</option>
+              <option value="720">1 Month</option>
+                </select>
+              </div>
+            </div>
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton"><h6>Create:</h6></label>
+              <div class="col-md-4">
+                <button name="submitbutton" id="submitbutton" class="btn btn-primary mysubmitbutton" type="submit">Make New Code</button>
+              </div>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}
